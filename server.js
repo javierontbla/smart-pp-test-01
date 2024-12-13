@@ -13,18 +13,13 @@ const supabase = createClient(
 app.get("/", async (req, res) => {
   try {
     const { error } = await supabase.from("sensors-data").insert({
-      moisture: 0,
-      temperature: 0,
-      bits_moisture: 0,
-      bits_temperature: 0,
-      voltage_moisture: 0,
-      voltage_temperature: 0,
+      moisture: 0.0,
+      temperature: 0.0,
     });
-    console.log(error);
+    res.status(200).json({ status: "success" });
   } catch (error) {
     console.log(error);
   }
-  res.send("Successful response and data published.");
 });
 
 app.post("/store-moisture-average", async (req, res) => {
