@@ -23,10 +23,11 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/store-moisture-average", async (req, res) => {
-  const { moisture_average, temperature_average } = req.body;
+  const { moisture_average, temperature_average, battery_level } = req.body;
   const { error } = await supabase.from("sensors-data").insert({
     moisture: moisture_average,
     temperature: temperature_average,
+    battery_level: battery_level,
   });
   res.status(200).json({ status: "success" });
 });
