@@ -22,7 +22,7 @@ app.post("/store-sensor-readings", async (req, res) => {
 
 app.post("/store-error-logs", async (req, res) => {
   const { esp32_error } = req.body;
-  const { error } = await supabase.from("errors-logs").insert({
+  const { error } = await supabase.from("error-logs").insert({
     error: esp32_error,
   });
   res.status(200).json({ status: "success" });
