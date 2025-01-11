@@ -12,18 +12,15 @@ const supabase = createClient(
 
 app.post("/store-sensor-readings", async (req, res) => {
   const { moisture_average, temperature_average, battery_level } = req.body;
+  let date = new Date();
+  let options = { timeZone: "America/Mexico_City" };
+  let mexico_city_time = date.toLocaleString("de-DE", options);
+
   const { error } = await supabase.from("sensor-readings-prototype-v1").insert({
     moisture: moisture_average,
     temperature: temperature_average,
     battery_level: battery_level,
-  });
-  res.status(200).json({ status: "success" });
-});
-
-app.post("/store-error-logs", async (req, res) => {
-  const { esp32_error } = req.body;
-  const { error } = await supabase.from("error-logs").insert({
-    error: esp32_error,
+    time: mexico_city_time,
   });
   res.status(200).json({ status: "success" });
 });
